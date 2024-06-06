@@ -4,24 +4,23 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardList = document.querySelector('.places__list');
 
 // @todo: Функция создания карточки
-function createCard(cards, deletedCard) {
-    const card = cardTemplate.querySelector('.card').cloneNode(true);
-    const cardTitle = card.querySelector('.card__title');
-    const cardImage = card.querySelector('.card__image');
-    cardImage.src = cards.link;
-    cardImage.alt = cards.name;
-    cardTitle.textContent = cards.name;
-    deletedCard(card)
-    return card;
+function createCard(card, deletedCard) {
+    const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
+    const cardTitle = cardItem.querySelector('.card__title');
+    const cardImage = cardItem.querySelector('.card__image');
+    cardImage.src = card.link;
+    cardImage.alt = card.name;
+    cardTitle.textContent = card.name;
+    cardItem.querySelector('.card__delete-button').addEventListener('click', function (){
+        deletedCard(cardItem);
+    });
+    return cardItem;
 }
 
 // @todo: Функция удаления карточки
 
 const deleteCard = function (card) {
-    const cardButtonDelete = card.querySelector('.card__delete-button');
-    cardButtonDelete.addEventListener('click', function () {
         card.remove();
-    });
 };
 
 // @todo: Вывести карточки на страницу
